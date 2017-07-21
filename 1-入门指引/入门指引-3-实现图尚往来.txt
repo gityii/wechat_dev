@@ -1,0 +1,67 @@
+
+3 实现“图”尚往来
+
+目的：
+   1）引入素材管理
+   2）以文本消息，图片消息为基础，可自行理解剩余的语音消息、视频消息、地理消息等
+   预实现功能：接受粉丝发送的图片消息，并立马回复相同的图片给粉丝。
+
+3.1 接收图片消息
+
+即粉丝给公众号发送的图片消息。官方wiki链接：消息管理/接收消息-接受普通消息/ 图片消息。从实例讲解，粉丝给公众号发送一张图片消息，在公众号开发者后台接收到的xml如下:
+
+   <xml>
+   <ToUserName><![CDATA[公众号]]></ToUserName>
+   <FromUserName><![CDATA[粉丝号]]></FromUserName>
+   <CreateTime>1460536575</CreateTime>
+   <MsgType><![CDATA[image]]></MsgType>
+   <PicUrl><![CDATA[http://mmbiz.qpic.cn/xxxxxx /0]]></PicUrl>
+   <MsgId>6272956824639273066</MsgId>
+   <MediaId><![CDATA[gyci5a-xxxxx-OL]]></MediaId>
+   </xml> 
+   
+   特别说明：
+   PicUrl: 这个参数是微信系统把“粉丝“发送的图片消息自动转化成url。 这个url可用浏览器打开查看到图片。 
+   MediaId: 是微信系统产生的id 用于标记该图片
+   
+
+   
+3.2 被动回复图片消息
+   
+   即公众号给粉丝发送的图片消息。
+   特别说明：
+   1）被动回复消息，即发送被动响应消息，不同于客服消息接口
+   2）它其实并不是一种接口，而是对微信服务器发过来消息的一次回复
+   3）收到粉丝消息后不想或者不能5秒内回复时，需回复“success”字符串（下文详细介绍）
+   4）客服接口在满足一定条件下随时调用
+   
+   开发者发送给微信后台的xml 如下：
+    <xml>
+   <ToUserName><![CDATA[粉丝号]]></ToUserName>
+   <FromUserName><![CDATA[公众号]]></FromUserName>
+   <CreateTime>1460536576</CreateTime>
+   <MsgType><![CDATA[image]]></MsgType>
+   <Image>
+   <MediaId><![CDATA[gyci5oxxxxxxv3cOL]]></MediaId>
+   </Image>
+   </xml>
+   
+   这里填写的MediaId的内容，其实就是粉丝的发送图片的原MediaId，所以粉丝收到了一张一模一样的原图。
+   如果想回复粉丝其它图片怎么呢？
+   1）新增素材，请参考 新增临时素材 或者 新增永久素材 
+   2）获取其MediaId，请参考 获取临时素材MediaID 或者 获取永久素材MediaID
+
+
+
+
+
+
+
+
+   
+   
+   
+
+
+
+

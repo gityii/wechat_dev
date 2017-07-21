@@ -1,0 +1,55 @@
+每个公众号会产生一个安全的OpenID，只有一个UnionID，可以在用户管理-获取用户基本信息（UnionID机制）
+
+公众平台以access_token为接口调用凭据，来调用接口，所有接口的调用需要先获取access_token，access_token在2小时内有效，过期需要重新获取，但1天内获取次数有限，开发者需自行存储，详见获取接口调用凭据（access_token）文档。
+
+公众号主要通过公众号消息会话和公众号内网页来为用户提供服务的
+公众号是以微信用户的一个联系人形式存在的，消息会话是公众号与用户交互的基础。
+
+
+一、接口调用：
+
+1、 接口调用频次限制：
+	当超过一定限制时，调用对应接口会收到如下错误返回码：
+	{"errcode":45009,"errmsg":"api freq out of limit"}
+	
+
+2、方法：
+公众号调用或第三方平台帮公众号调用对公众号的所有api调用（包括第三方帮其调用）次数进行清零：
+	
+    HTTP请求：POST
+    HTTP调用：
+    https://api.weixin.qq.com/cgi-bin/clear_quota?access_token=ACCESS_TOKEN
+  	
+
+调用示例：
+
+    {
+        “appid”:“APPID”
+    }
+
+   
+参数说明：
+   
+   参数	     是否必须			说明
+   
+   access_token 	是				调用接口凭据
+   appid			是				公众号的APPID  
+
+
+正常情况下，会返回：
+
+   {
+       "errcode":0,
+       "errmsg":"ok"
+   }
+   
+
+如果调用超过限制次数，则返回：
+
+  {
+      "errcode":48006,
+      "errmsg":"forbid to clear quota because of reaching the limit"
+  }   
+  
+  
+3、接口返回码  

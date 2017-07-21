@@ -1,0 +1,14 @@
+开发相关配置信息：
+
+AppID： wxc71e1e8c468e226d 
+
+接口参数调试：
+
+三、参数列表：
+* URL :         		开发者填写URL，调试时将把消息推送到该URL上
+* ToUserName :      	开发者微信号
+* FromUserName :	 	发送方帐号（一个OpenID）
+* CreateTime : 			消息创建时间 （整型）
+* MsgType : 			消息类型（文本消息为 text ）
+* Content : 			消息类型（文本消息内容）
+* MsgId : 				消息类型（消息id，64位整型）
