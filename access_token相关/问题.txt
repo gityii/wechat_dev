@@ -1,0 +1,14 @@
+
+1、 问题：      Undefined index: HTTP_RAW_POST_DATA
+    解决方法：  $postStr = isset($GLOBALS['HTTP_RAW_POST_DATA']) ? $GLOBALS['HTTP_RAW_POST_DATA'] : file_get_contents("php://input"); 
+
+2、 问题：      token验证失败
+    解决方法：                
+                1、php文件编码问题
+                   用NotPad++打开，是否为UTF-8无BOM编码格式，不是专为UTF-8无BOM编码格式
+                2、检查微信后台Token(令牌)前后是否有空格
+                   有空格把空格去掉
+                3、检查微信后台Token与服务器后台Token是否一致 
+				4、清除掉输出缓存区就OK了【保证代码以及配置没有错误的情况下】，在echo $echoStr前面加一句ob_clean();
+
+3、服务器配置后要启用				
