@@ -1,4 +1,4 @@
-每个公众号会产生一个安全的OpenID，只有一个UnionID，可以在用户管理-获取用户基本信息（UnionID机制）
+ 每个公众号会产生一个安全的OpenID，只有一个UnionID，可以在用户管理-获取用户基本信息（UnionID机制）
 
 公众平台以access_token为接口调用凭据，来调用接口，所有接口的调用需要先获取access_token，access_token在2小时内有效，过期需要重新获取，但1天内获取次数有限，开发者需自行存储，详见获取接口调用凭据（access_token）文档。
 

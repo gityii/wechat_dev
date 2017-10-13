@@ -5,9 +5,9 @@
 
 //define your token
 define("TOKEN", "weixin");
-		file_put_contents('showdata', "123");echo "qwer";
+		//file_put_contents('showdata', "123");echo "qwer";
 $wechatObj = new wechatCallbackapiTest();
-//$wechatObj->valid();
+$wechatObj->valid();
 $wechatObj->responseMsg();
 class wechatCallbackapiTest
 {
@@ -33,7 +33,7 @@ class wechatCallbackapiTest
 		//get post data, May be due to the different environments
 		//$postStr = $GLOBALS["HTTP_RAW_POST_DATA"];
         $postStr = isset($GLOBALS['HTTP_RAW_POST_DATA']) ? $GLOBALS['HTTP_RAW_POST_DATA'] : file_get_contents("php://input");
-		file_put_contents('showdata', "123");
+		//file_put_contents('showdata', "123");
       	//extract post data
 		if (!empty($postStr)){
                 /* libxml_disable_entity_loader is to prevent XML eXternal Entity Injection,
