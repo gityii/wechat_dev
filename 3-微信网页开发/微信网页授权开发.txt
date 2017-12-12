@@ -1,0 +1,39 @@
+一、
+1、应用下新增模块Wechat，新增基础目录Controller、Conf、View和Lib目录文件夹。
+2、为了方便微信公众平台服务器的基本配置，在Lib目录下新建Wx文件夹并引入微信基础接口类WxBase.class.php，用于基础的微信接口使用支持。
+3、在index.php入口文件中新增自定义常量APP_ID和APP_SECRET,用于基础的开发配置
+4、在Wechat/Controller中新建WechatController.class.php父类控制器
+5、在\Wechat\Lib\Wx下新增WxAuth.class.php类文件，微信网页授权的相关方法与步骤都在这里面实现
+
+
+二、
+
+1、引导用户授权并获取code值
+在确保微信公众平台账号拥有微信网页授权权限（获取高级权限的接口）的前提下，根据实际需求可以引导用户访问以下路径：
+
+https://open.weixin.qq.com/connect/oauth2/authorize?appid=APPID&redirect_uri=REDIRECT_URI&response_type=code&scope=SCOPE&state=STATE#wechat_redirect
+
+参数说明
+参数			必须			说明
+appid 			 是 			公众号的唯一标识
+redirect_uri 	 是 			授权后重定向的回调链接地址
+response_type 	 是 			返回类型，请填写code
+scope 			 是 			应用授权作用域,snsapi_base（不弹出授权页面，直接跳转，只能获取用户openid），
+								nsapi_userinfo（弹出授权页面，可通过openid拿到昵称、性别、所在地。并且，即使在未关注的情况下，只要用户授权，也能获取其信息）
+state 			 否 			重定向后会带上state参数，开发者可以填写任意参数值
+#wechat_redirect  否 	        直接在微信打开链接，可以不填此参数。做页面302重定向时候，必须带此参数
+
+注意：链接的参数顺序不对，授权页面将无法正常访问。
+
+网页授权开发的第一步就是要创建符合标准的访问地址，先在WxAuth.class.php类中新增以下两个方法：
+设置回调地址方法：    实例化类后使用此方法设置授权访问的回调地址。
+设置授权访问地址方法：用来创建符合当前公众平台帐号的用户访问授权地址。
+/*文件中也封装了getDataByUrl()方法来专门以GET的方式请求网页，核心方法是使用了PHP系统函数file_get_contents()*/
+
+
+2、在Wechat/Controller目录下新建IndexController.class.php控制器文件，
+
+
+
+====放弃tp5开发，直接从YII开发，以模块的方式加入======
+
